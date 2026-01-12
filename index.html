@@ -1,1 +1,701 @@
-https
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Геннадий Черняк — онлайн-консультации для родителей детей с ДЦП</title>
+  <meta name="description" content="Онлайн-консультации и рекомендации для родителей детей с ДЦП: разбор развития ребёнка, упражнения, ошибки, страхи, реальные шаги помощи." />
+
+  <meta property="og:title" content="Геннадий Черняк — онлайн-консультации для родителей детей с ДЦП">
+  <meta property="og:description" content="Разбор развития ребёнка, упражнения, ошибки, страхи родителей и реальные шаги помощи. 27+ лет практики.">
+  <meta property="og:type" content="website">
+
+  <style>
+    :root{
+      --bg:#e8f4fd;
+      --card:#ffffff;
+      --text:#0d2847;
+      --muted:#4a6b8a;
+      --line:#c5e0f7;
+
+      --shadow: 0 4px 16px rgba(13,40,71,.1);
+      --shadow-hover: 0 10px 28px rgba(13,40,71,.16);
+
+      --radius: 16px;
+      --max: 1080px;
+
+      --accent:#1a8cff;
+      --accent-2:#0066cc;
+      --accent-bright:#00a8ff;
+      --accent-light:#e3f3ff;
+      --accent-ultra:#ccebff;
+      --sky:#4db8ff;
+      --sky-light:#d6f0ff;
+      --success:#00c853;
+      --success-light:#ccffe5;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    html,body{height:100%}
+    body{
+      margin:0;
+      color:var(--text);
+      background: linear-gradient(180deg, #d6f0ff 0%, var(--bg) 100%);
+      background-attachment: fixed;
+      min-height: 100vh;
+      font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+      letter-spacing:.2px;
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:40px 20px 60px}
+
+    @keyframes fadeInUp {
+      from {opacity:0; transform:translateY(20px)}
+      to {opacity:1; transform:translateY(0)}
+    }
+    @keyframes float {
+      0%, 100% {transform:translateY(0)}
+      50% {transform:translateY(-10px)}
+    }
+    @keyframes pulse {
+      0%, 100% {transform:scale(1)}
+      50% {transform:scale(1.05)}
+    }
+
+    header{
+      padding:32px;
+      background: var(--card);
+      border:2px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      animation: fadeInUp 0.6s ease;
+    }
+
+    .hero{
+      display:grid;
+      grid-template-columns: 160px 1fr;
+      gap:28px;
+      align-items:start;
+    }
+
+    .avatarbox{
+      display:grid;
+      gap:12px;
+    }
+
+    .slogan{
+      font-size:13px;
+      font-weight:700;
+      letter-spacing:.3px;
+      color: #ffffff;
+      background: linear-gradient(135deg, var(--accent-bright) 0%, var(--sky) 100%);
+      border:none;
+      padding:10px 12px;
+      border-radius: 12px;
+      text-align:center;
+      animation: pulse 3s ease-in-out infinite;
+      box-shadow: 0 4px 16px rgba(0,168,255,.25);
+    }
+
+    .avatar{
+      width:160px;height:160px;border-radius: 20px;
+      overflow:hidden;
+      border:3px solid var(--accent-bright);
+      background: linear-gradient(135deg, var(--accent-ultra) 0%, var(--sky-light) 100%);
+      display:grid;place-items:center;
+      box-shadow: 0 8px 24px rgba(26,140,255,.2);
+      transition: transform .3s ease;
+    }
+    .avatar:hover{
+      transform: scale(1.02);
+    }
+    .avatar img{
+      width:100%;height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    h1{
+      margin:0;
+      font-size: 32px;
+      line-height: 1.2;
+      font-weight: 800;
+      color: var(--text);
+      background: linear-gradient(135deg, var(--text) 0%, var(--accent-2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .names{
+      margin-top:8px;
+      color:var(--muted);
+      font-size: 14px;
+    }
+
+    .lead{
+      margin-top:16px;
+      color:var(--text);
+      font-size: 18px;
+      max-width: 75ch;
+      line-height: 1.6;
+      font-weight: 500;
+    }
+
+    .quote{
+      margin-top:18px;
+      padding:18px 20px;
+      border-radius: 16px;
+      border:2px solid var(--accent-bright);
+      background: linear-gradient(135deg, var(--accent-ultra) 0%, #e3f3ff 100%);
+      color: var(--text);
+      position: relative;
+      overflow: hidden;
+    }
+    .quote:before{
+      content:'"';
+      position:absolute;
+      top:-10px;
+      left:10px;
+      font-size:80px;
+      color:rgba(77,184,255,.15);
+      font-family: Georgia, serif;
+      font-weight:bold;
+    }
+    .quote b{
+      color: var(--accent-2);
+      position:relative;
+    }
+    .quote .author{
+      display:block;
+      margin-top:10px;
+      font-size: 13px;
+      color: var(--muted);
+      position:relative;
+    }
+
+    .bullets{
+      margin-top:18px;
+      display:grid;
+      gap:12px;
+      padding-left:0;
+      list-style:none;
+      max-width: 78ch;
+    }
+    .bullets li{
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      padding:16px;
+      border:2px solid var(--line);
+      border-radius: 14px;
+      background: linear-gradient(135deg, #ffffff 0%, var(--accent-light) 100%);
+      transition: all .3s ease;
+    }
+    .bullets li:hover{
+      border-color: var(--accent-bright);
+      transform: translateX(4px);
+      box-shadow: 0 4px 16px rgba(26,140,255,.15);
+    }
+    .check{
+      width:26px;height:26px;
+      border-radius: 999px;
+      display:grid;place-items:center;
+      flex: 0 0 26px;
+      background: var(--success-light);
+      border: 2px solid var(--success);
+      color: var(--success);
+      font-weight: 900;
+      font-size:14px;
+      line-height: 1;
+      margin-top:1px;
+    }
+
+    .method-grid{
+      margin-top:20px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:16px;
+      max-width: 78ch;
+    }
+    .mini{
+      padding:18px;
+      border-radius: 16px;
+      border:2px solid var(--accent-bright);
+      background: linear-gradient(135deg, var(--sky-light) 0%, #ffffff 100%);
+      transition: all .3s ease;
+    }
+    .mini:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(26,140,255,.2);
+      background: linear-gradient(135deg, var(--accent-bright) 0%, var(--sky) 100%);
+    }
+    .mini:hover h3,
+    .mini:hover p{
+      color: #ffffff;
+    }
+    .mini h3{
+      margin:0 0 10px 0;
+      font-size:15px;
+      letter-spacing:.3px;
+      color: var(--accent-2);
+      font-weight: 800;
+      transition: color .3s ease;
+    }
+    .mini p{
+      margin:0;
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.6;
+      transition: color .3s ease;
+    }
+
+    .cta-section{
+      margin-top:32px;
+      padding:36px 32px;
+      background: linear-gradient(135deg, var(--accent-bright) 0%, var(--accent) 50%, var(--accent-2) 100%);
+      border-radius: 20px;
+      box-shadow: 0 12px 40px rgba(26,140,255,.35);
+      text-align:center;
+      color:#fff;
+      position: relative;
+      overflow:hidden;
+      animation: fadeInUp 0.8s ease 0.2s both;
+    }
+    .cta-section:before{
+      content:"";
+      position:absolute;
+      inset:-100px -80px auto auto;
+      width:250px;height:250px;
+      border-radius:999px;
+      background: radial-gradient(circle, rgba(255,255,255,.3) 0%, transparent 70%);
+      filter: blur(40px);
+      animation: float 6s ease-in-out infinite;
+    }
+    .cta-section h2{
+      margin:0 0 12px 0;
+      font-size:28px;
+      font-weight:800;
+      position:relative;
+    }
+    .cta-section p{
+      margin:0 0 24px 0;
+      font-size:17px;
+      opacity:.95;
+      position:relative;
+    }
+
+    .cta-actions{
+      display:flex;
+      gap:14px;
+      justify-content:center;
+      flex-wrap:wrap;
+      position:relative;
+    }
+
+    .btn{
+      display:inline-block;
+      padding:16px 32px;
+      border-radius:999px;
+      font-size:16px;
+      font-weight:700;
+      border:none;
+      cursor:pointer;
+      transition: all .3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,.15);
+      text-decoration: none;
+    }
+    .btn-primary{
+      background:#fff;
+      color: var(--accent-2);
+    }
+    .btn-primary:hover{
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 10px 28px rgba(0,0,0,.25);
+    }
+    .btn-ghost{
+      background: rgba(255,255,255,.15);
+      color:#fff;
+      border:2px solid rgba(255,255,255,.35);
+      box-shadow:none;
+    }
+    .btn-ghost:hover{
+      background: rgba(255,255,255,.25);
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,.5);
+    }
+
+    .grid{
+      margin-top:32px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:24px;
+    }
+    .card{
+      padding:28px;
+      border-radius: 20px;
+      background: var(--card);
+      border: 2px solid var(--line);
+      box-shadow: var(--shadow);
+      transition: all .3s ease;
+    }
+    .card:hover{
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-4px);
+      border-color: var(--accent-bright);
+    }
+    h2{
+      margin:0 0 20px 0;
+      font-size: 22px;
+      letter-spacing:.3px;
+      font-weight:800;
+      color:var(--text);
+    }
+    ul{
+      margin:0;
+      padding-left: 0;
+      list-style:none;
+      display:grid;
+      gap:14px;
+      color: var(--text);
+    }
+    ul li{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:999px;
+      background: linear-gradient(135deg, var(--accent-bright) 0%, var(--sky) 100%);
+      flex: 0 0 10px;
+      margin-top:8px;
+      box-shadow: 0 0 0 4px rgba(77,184,255,.25);
+    }
+    .muted{
+      color: var(--muted);
+      font-size: 14px;
+      line-height:1.6;
+    }
+    .small{
+      font-size: 13px;
+      color: var(--muted);
+      line-height:1.6;
+    }
+
+    details{
+      margin-top:32px;
+      border:2px solid var(--line);
+      background: var(--card);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      transition: all .3s ease;
+    }
+    details:hover{
+      box-shadow: var(--shadow-hover);
+    }
+    summary{
+      cursor:pointer;
+      padding:22px 28px;
+      font-weight:800;
+      font-size: 18px;
+      color: var(--accent-2);
+      list-style:none;
+      outline:none;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      transition: background .2s ease;
+    }
+    summary:hover{
+      background: var(--accent-light);
+    }
+    summary::-webkit-details-marker{display:none}
+    summary:after{
+      content:"▼";
+      font-size:14px;
+      color: var(--muted);
+      transition: transform .3s ease;
+    }
+    details[open] summary:after{ transform: rotate(180deg); }
+
+    .offer{
+      padding:0 28px 28px 28px;
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+
+    footer{
+      margin-top:28px;
+      padding:24px 28px;
+      border-radius: 20px;
+      border:2px solid var(--accent-bright);
+      background: linear-gradient(135deg, var(--sky-light) 0%, #ffffff 100%);
+      color: var(--muted);
+      font-size: 14px;
+      line-height:1.7;
+      text-align: center;
+    }
+
+    .stats{
+      margin-top:28px;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:16px;
+    }
+    .stat{
+      padding:24px;
+      border-radius: 16px;
+      background: var(--card);
+      border:2px solid var(--line);
+      text-align:center;
+      transition: all .3s ease;
+    }
+    .stat:hover{
+      transform: translateY(-4px);
+      box-shadow: 0 8px 28px rgba(26,140,255,.18);
+      border-color: var(--accent-bright);
+    }
+    .stat-number{
+      font-size: 36px;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--accent-bright) 0%, var(--accent-2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-label{
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    @media (max-width: 860px){
+      .hero{grid-template-columns: 1fr; }
+      .avatarbox{justify-items:center}
+      .avatar{width:140px;height:140px}
+      .method-grid{grid-template-columns: 1fr}
+      .grid{grid-template-columns: 1fr}
+      .stats{grid-template-columns: 1fr}
+      h1{font-size:26px}
+      .cta-section h2{font-size:24px}
+      .cta-section{padding:28px 24px}
+    }
+  </style>
+</head>
+
+<body>
+  <main class="wrap">
+    <header>
+      <div class="hero">
+        <div class="avatarbox">
+          <div class="slogan">Рядом с ребёнком — шаг за шагом</div>
+          <div class="avatar">
+            <img src="https://kw0rs.uno/AI/chernyak.jpg" alt="Геннадий Черняк" loading="lazy" />
+          </div>
+        </div>
+
+        <div>
+          <h1>Геннадий Черняк</h1>
+          <div class="names">
+            Черняк Геннадий Владимирович · Cherniak Hennadii
+          </div>
+
+          <p class="lead">
+            Онлайн-консультации и рекомендации для родителей детей с ДЦП.
+          </p>
+
+          <div class="quote">
+            <b>«Постоянство, систематичность, последовательность</b> — три ключевых принципа при тренировке и достижении результата.»
+            <span class="author">— Геннадий Черняк</span>
+          </div>
+
+          <ul class="bullets" aria-label="О чём консультация">
+            <li><span class="check">✓</span><span>Разбираем развитие ребёнка, упражнения, ошибки, страхи родителей и реальные шаги помощи.</span></li>
+            <li><span class="check">✓</span><span>Более чем с 27-летним практическим опытом работы с детьми.</span></li>
+            <li><span class="check">✓</span><span>За годы практики Геннадий Черняк работал с детьми разного возраста и с различными формами ДЦП, помогая родителям выстраивать реалистичную и безопасную реабилитацию.</span></li>
+          </ul>
+
+          <div class="method-grid" aria-label="Подход и методики">
+            <div class="mini">
+              <h3>Авторы / школа</h3>
+              <p>Анатолий Смолянинов, Мизина, Семёнова К. А.</p>
+            </div>
+            <div class="mini">
+              <h3>Методики</h3>
+              <p>Войта-терапия, йога, Боба-терапия, рефлексотерапия, кинезиотерапия, спортивные элементы + педагогический и тренерский подход.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="stats">
+      <div class="stat">
+        <div class="stat-number">27+</div>
+        <div class="stat-label">лет практики</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">100%</div>
+        <div class="stat-label">онлайн формат</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">1:1</div>
+        <div class="stat-label">индивидуально</div>
+      </div>
+    </section>
+
+    <section class="cta-section" id="pay">
+      <h2>Запишитесь на онлайн-консультацию</h2>
+      <p>Получите индивидуальный план реабилитации и ответы на ваши вопросы</p>
+
+      <div class="cta-actions">
+        <a href="https://kw0rs.uno/beta2/pay" class="btn btn-primary" role="button">Записаться и оплатить</a>
+        <a href="#offer" class="btn btn-ghost" role="button">Публичная оферта</a>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h2>Что вы получите в результате консультации</h2>
+        <ul>
+          <li><span class="check">✓</span><span>Понимание текущего состояния ребёнка</span></li>
+          <li><span class="check">✓</span><span>Индивидуальные рекомендации, а не общие советы</span></li>
+          <li><span class="check">✓</span><span>Чёткое понимание, что можно делать дома, а что нельзя</span></li>
+          <li><span class="check">✓</span><span>Ответы на ваши конкретные вопросы</span></li>
+          <li><span class="check">✓</span><span>Рекомендации по дальнейшей реабилитации</span></li>
+        </ul>
+        <p class="muted" style="margin:18px 0 0 0;">
+          Формат — онлайн, фокус на ясности и безопасности действий.
+        </p>
+      </article>
+
+      <article class="card">
+        <h2>Кому подойдёт онлайн-консультация</h2>
+        <ul>
+          <li><span class="dot"></span><span>Родителям детей с диагнозом ДЦП</span></li>
+          <li><span class="dot"></span><span>Если вы не понимаете, какие упражнения безопасны</span></li>
+          <li><span class="dot"></span><span>Если нет хороших специалистов рядом</span></li>
+          <li><span class="dot"></span><span>Если реабилитация в клиниках слишком дорогая</span></li>
+          <li><span class="dot"></span><span>Если вы боитесь навредить ребёнку неправильными действиями</span></li>
+          <li><span class="dot"></span><span>Если хотите понятный и пошаговый план</span></li>
+        </ul>
+        <p class="small" style="margin:18px 0 0 0;">
+          Можно прислать вашу ситуацию/вопросы заранее — так будет конкретнее.
+        </p>
+      </article>
+    </section>
+
+    <details id="offer">
+      <summary>Публичная оферта</summary>
+      <div class="offer">ПУБЛИЧНАЯ ОФЕРТА
+
+на оказание онлайн-консультационных услуг
+
+1. Общие положения
+
+1.1. Настоящий документ является официальным предложением (публичной офертой) Геннадия Черняка (далее — Исполнитель) заключить договор на оказание онлайн-консультационных услуг с любым дееспособным лицом (далее — Клиент).
+
+1.2. Оплата услуг означает полное и безоговорочное принятие Клиентом условий настоящей оферты.
+
+1.3. Услуги оказываются исключительно в дистанционном формате (онлайн) с использованием средств видеосвязи и/или мессенджеров.
+
+2. Предмет договора
+
+2.1. Исполнитель оказывает информационно-консультационные услуги для родителей (законных представителей) детей с особенностями развития, включая детский церебральный паралич (ДЦП).
+
+2.2. Консультации направлены на:
+— информирование родителей;
+— разъяснение возможных подходов к развитию ребёнка;
+— обсуждение вопросов, связанных с организацией занятий, активности и поддержки ребёнка в повседневной жизни.
+
+2.3. Услуги не являются медицинскими, не относятся к лечению, диагностике или назначению терапии и не заменяют очный осмотр медицинских специалистов.
+
+3. ВАЖНЫЙ ДИСКЛЕЙМЕР
+
+3.1. Онлайн-консультации носят исключительно информационно-консультативный характер.
+
+3.2. Исполнитель:
+— не ставит медицинских диагнозов;
+— не назначает лечение или медикаменты;
+— не корректирует назначенную врачами терапию;
+— не гарантирует конкретных медицинских результатов.
+
+3.3. Все решения, касающиеся здоровья и развития ребёнка, Клиент принимает самостоятельно и/или совместно с профильными медицинскими специалистами.
+
+4. Порядок оказания услуг
+
+4.1. Консультации проводятся по предварительной записи.
+
+4.2. Дата, время и формат консультации согласовываются с Клиентом индивидуально.
+
+4.3. Формат консультации:
+— видеосвязь (Zoom, WhatsApp, Telegram или аналогичные платформы);
+— продолжительность консультации указывается на сайте либо сообщается Клиенту до оплаты.
+
+4.4. Клиент обязуется предоставить достоверную и корректную информацию, необходимую для проведения консультации.
+
+5. Стоимость и порядок оплаты
+
+5.1. Стоимость консультационных услуг указывается на сайте Исполнителя либо сообщается Клиенту до момента оплаты.
+
+5.2. Оплата производится:
+— через платёжную систему PayPal;
+— либо иными способами, указанными на сайте (например, банковский перевод).
+
+5.3. Оплата осуществляется до начала консультации.
+
+5.4. Рекомендуемое назначение платежа:
+«Консультационные (информационные) услуги»
+
+6. Условия отмены и возврата средств
+
+6.1. Клиент вправе отменить или перенести консультацию, уведомив Исполнителя не позднее чем за 24 часа до согласованного времени.
+
+6.2. В случае неявки Клиента на консультацию без предварительного уведомления услуга считается оказанной, и денежные средства не подлежат возврату.
+
+6.3. После проведения консультации возврат денежных средств не осуществляется, так как услуга считается оказанной в полном объёме.
+
+7. Ответственность сторон
+
+7.1. Исполнитель не несёт ответственности за решения, принятые Клиентом на основании информации, полученной в ходе консультации.
+
+7.2. Исполнитель не несёт ответственности за технические сбои, возникшие по причинам, не зависящим от него (проблемы интернет-соединения, сбои платформ).
+
+7.3. Клиент несёт полную ответственность за использование полученной информации.
+
+8. Персональные данные
+
+8.1. Принимая условия настоящей оферты, Клиент даёт согласие на обработку своих персональных данных исключительно в целях оказания консультационных услуг.
+
+8.2. Персональные данные не передаются третьим лицам и не используются в иных целях.
+
+9. Заключительные положения
+
+9.1. Настоящая оферта вступает в силу с момента её публикации на сайте и действует бессрочно.
+
+9.2. Исполнитель вправе вносить изменения в условия оферты без предварительного уведомления Клиента.
+
+9.3. Актуальная версия оферты всегда доступна на сайте.
+
+10. Контактная информация Исполнителя
+
+Исполнитель: Геннадий Черняк
+Формат оказания услуг: онлайн
+Контактные данные: указываются на сайте
+Email: указывается на сайте</div>
+    </details>
+
+    <footer>
+      Онлайн-консультации носят информационно-консультативный характер и не заменяют очный осмотр врача.
+      Все рекомендации даются с учётом предоставленной информации родителей/опекунов.
+    </footer>
+  </main>
+</body>
+</html>
