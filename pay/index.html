@@ -1,1 +1,270 @@
 
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Оплата консультации — Геннадий Черняк</title>
+
+<style>
+:root{
+  --bg:#f6f8fb;
+  --card:#ffffff;
+  --text:#1f2a37;
+  --muted:#6b7280;
+  --line:#e5e7eb;
+  --accent:#0f4c81;
+  --accent-soft:#e6eef6;
+  --shadow:0 10px 28px rgba(15,76,129,.12);
+  --radius:16px;
+  --max:760px;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(1000px 300px at 50% -10%, #eef4fa 0%, transparent 60%),
+    var(--bg);
+}
+
+.wrap{
+  max-width:var(--max);
+  margin:0 auto;
+  padding:40px 20px 60px;
+}
+
+.back-link{
+  color:var(--accent);
+  font-size:14px;
+  margin-bottom:20px;
+  display:inline-block;
+}
+
+.card{
+  background:var(--card);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:40px;
+}
+
+/* ===== EXPERT ===== */
+
+.expert-header{
+  display:flex;
+  gap:24px;
+  align-items:center;
+  margin-bottom:32px;
+}
+
+.expert-photo{
+  width:110px;
+  height:110px;
+  border-radius:50%;
+  object-fit:cover;
+}
+
+.expert-info h2{
+  margin:0;
+  font-size:26px;
+}
+
+.expert-role{
+  color:var(--muted);
+  font-size:14px;
+  margin-bottom:8px;
+}
+
+.expert-title{
+  font-size:20px;
+  font-weight:600;
+}
+
+.expert-subtitle{
+  color:var(--muted);
+  font-size:15px;
+}
+
+/* ===== PRICE ===== */
+
+.price-block{
+  background:#fff;
+  border-radius:14px;
+  padding:24px;
+  text-align:center;
+  margin-bottom:32px;
+  border:1px solid var(--line);
+}
+
+.price{
+  font-size:40px;
+  font-weight:600;
+  color:var(--accent);
+}
+
+.price-note{
+  color:var(--muted);
+}
+
+/* ===== FORM ===== */
+
+.form-group{margin-bottom:20px}
+
+label{
+  font-weight:600;
+  font-size:14px;
+}
+
+input, textarea{
+  width:100%;
+  padding:14px 16px;
+  border-radius:10px;
+  border:1px solid var(--line);
+  font-size:15px;
+}
+
+input:focus, textarea:focus{
+  outline:none;
+  border-color:var(--accent);
+}
+
+/* ===== PAYMENTS ===== */
+
+.payment-methods{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:14px;
+  margin-bottom:24px;
+}
+
+.payment-method{
+  border:1px solid var(--line);
+  padding:16px;
+  border-radius:12px;
+  text-align:center;
+  cursor:pointer;
+}
+
+.payment-method.selected{
+  border-color:var(--accent);
+  background:var(--accent-soft);
+}
+
+.payment-icon{font-size:28px}
+
+/* ===== BUTTON ===== */
+
+.btn-submit{
+  margin-top:28px;
+  width:100%;
+  padding:18px;
+  font-size:17px;
+  font-weight:600;
+  background:var(--accent);
+  color:#fff;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+}
+
+.btn-submit:hover{
+  background:#0c3f6b;
+}
+
+/* ===== INFO ===== */
+
+.info-box{
+  margin-top:30px;
+  background:#f9fafb;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:20px;
+  font-size:14px;
+  color:var(--muted);
+}
+</style>
+</head>
+
+<body>
+<main class="wrap">
+
+<a href="#" class="back-link" onclick="history.back();return false;">← Вернуться назад</a>
+
+<div class="card">
+
+  <!-- EXPERT -->
+  <div class="expert-header">
+    <img src="https://via.placeholder.com/220" class="expert-photo" alt="Геннадий Черняк">
+    <div class="expert-info">
+      <h2>Gennady Chernyak</h2>
+      <div class="expert-role">Certified Consultant · Online</div>
+      <div class="expert-title">Частная онлайн-консультация</div>
+      <div class="expert-subtitle">Персонально · Конфиденциально · Профессионально</div>
+    </div>
+  </div>
+
+  <!-- PRICE -->
+  <div class="price-block">
+    <div class="price">CHF 150</div>
+    <div class="price-note">60 минут · Online</div>
+  </div>
+
+  <!-- FORM -->
+  <form method="POST" action="https://script.google.com/macros/s/AKfycbzFd3FwE29zZzOG5700SMPx3Ve71fwVrOZPAzB9iFCP9gXUppn5YFDyUSu7ndXFR7vg/exec">
+
+    <input type="hidden" name="paymentMethod" id="paymentMethod" value="card">
+    <input type="hidden" name="amount" value="150">
+
+    <div class="form-group">
+      <label>Ваше имя *</label>
+      <input required>
+    </div>
+
+    <div class="form-group">
+      <label>Телефон *</label>
+      <input placeholder="+41 XX XXX XX XX" required>
+    </div>
+
+    <div class="form-group">
+      <label>Email *</label>
+      <input type="email" required>
+    </div>
+
+    <div class="form-group">
+      <label>Возраст ребёнка</label>
+      <input placeholder="Например: 5 лет">
+    </div>
+
+    <div class="form-group">
+      <label>Ваши вопросы</label>
+      <textarea></textarea>
+    </div>
+
+    <label>Способ оплаты</label>
+    <div class="payment-methods">
+      <div class="payment-method selected" onclick="paymentMethod.value='card'">
+        <div class="payment-icon">💳</div>Карта
+      </div>
+      <div class="payment-method" onclick="paymentMethod.value='paypal'">
+        <div class="payment-icon">🅿️</div>PayPal
+      </div>
+      <div class="payment-method" onclick="paymentMethod.value='twint'">
+        <div class="payment-icon">📱</div>TWINT
+      </div>
+    </div>
+
+    <button class="btn-submit">Перейти к безопасной оплате</button>
+
+    <div class="info-box">
+      После оплаты вы получите подтверждение и ссылку на онлайн-встречу.
+    </div>
+
+  </form>
+
+</div>
+</main>
+</body>
+</html>
