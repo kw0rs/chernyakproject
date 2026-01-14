@@ -1,270 +1,367 @@
-
 <!doctype html>
 <html lang="ru">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Оплата консультации — Геннадий Черняк</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Оплата консультации — Геннадий Черняк</title>
+  <style>
+    :root{
+      --bg:#f8fafc;
+      --card:#ffffff;
+      --text:#1a2332;
+      --muted:#5a6b7f;
+      --line:#e1e8f0;
+      --shadow: 0 4px 16px rgba(26,35,50,.08);
+      --shadow-hover: 0 8px 24px rgba(26,35,50,.12);
+      --radius: 16px;
+      --max: 680px;
+      --accent: #2b7bc9;
+      --accent-light: #e8f3fc;
+      --success: #16a34a;
+      --success-light: #dcfce7;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      color:var(--text);
+      background: linear-gradient(180deg, #f0f5fa 0%, var(--bg) 100%);
+      background-attachment: fixed;
+      min-height: 100vh;
+      font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+      letter-spacing:.2px;
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:40px 20px 60px}
 
-<style>
-:root{
-  --bg:#f6f8fb;
-  --card:#ffffff;
-  --text:#1f2a37;
-  --muted:#6b7280;
-  --line:#e5e7eb;
-  --accent:#0f4c81;
-  --accent-soft:#e6eef6;
-  --shadow:0 10px 28px rgba(15,76,129,.12);
-  --radius:16px;
-  --max:760px;
-}
+    .back-link{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      color:var(--muted);
+      font-size:14px;
+      margin-bottom:20px;
+      transition: color .2s ease;
+    }
+    .back-link:hover{ color:var(--accent); }
 
-*{box-sizing:border-box}
+    .card{
+      padding:32px;
+      border-radius: var(--radius);
+      background: var(--card);
+      border: 2px solid var(--line);
+      box-shadow: var(--shadow-hover);
+    }
 
-body{
-  margin:0;
-  font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-  color:var(--text);
-  background:
-    radial-gradient(1000px 300px at 50% -10%, #eef4fa 0%, transparent 60%),
-    var(--bg);
-}
+    h1{
+      margin:0 0 8px 0;
+      font-size: 28px;
+      line-height: 1.2;
+      letter-spacing: .2px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .subtitle{
+      color:var(--muted);
+      font-size:15px;
+      margin:0 0 28px 0;
+    }
 
-.wrap{
-  max-width:var(--max);
-  margin:0 auto;
-  padding:40px 20px 60px;
-}
+    .price-block{
+      background:var(--accent-light);
+      border:2px solid var(--accent);
+      border-radius:12px;
+      padding:20px;
+      margin-bottom:28px;
+      text-align:center;
+    }
+    .price-label{
+      font-size:14px;
+      color:var(--muted);
+      margin-bottom:4px;
+    }
+    .price{
+      font-size:42px;
+      font-weight:700;
+      color:var(--accent);
+      line-height:1;
+    }
+    .price-note{
+      font-size:13px;
+      color:var(--muted);
+      margin-top:8px;
+    }
 
-.back-link{
-  color:var(--accent);
-  font-size:14px;
-  margin-bottom:20px;
-  display:inline-block;
-}
+    .form-group{ margin-bottom:20px; }
 
-.card{
-  background:var(--card);
-  border-radius:var(--radius);
-  box-shadow:var(--shadow);
-  padding:40px;
-}
+    label{
+      display:block;
+      font-weight:600;
+      font-size:14px;
+      margin-bottom:8px;
+      color:var(--text);
+    }
+    input, textarea, select{
+      width:100%;
+      padding:12px 16px;
+      border:2px solid var(--line);
+      border-radius:10px;
+      font-size:15px;
+      font-family:inherit;
+      transition: all .2s ease;
+      background:var(--bg);
+    }
+    input:focus, textarea:focus, select:focus{
+      outline:none;
+      border-color:var(--accent);
+      background:var(--card);
+    }
+    textarea{
+      resize:vertical;
+      min-height:100px;
+    }
 
-/* ===== EXPERT ===== */
+    .checkbox-group{
+      display:flex;
+      align-items:flex-start;
+      gap:12px;
+      margin:24px 0;
+    }
+    .checkbox-group input[type="checkbox"]{
+      width:20px;
+      height:20px;
+      margin-top:2px;
+      cursor:pointer;
+      flex-shrink:0;
+    }
+    .checkbox-group label{
+      margin:0;
+      font-weight:400;
+      font-size:13px;
+      cursor:pointer;
+    }
 
-.expert-header{
-  display:flex;
-  gap:24px;
-  align-items:center;
-  margin-bottom:32px;
-}
+    .btn-submit{
+      width:100%;
+      padding:16px;
+      background: linear-gradient(135deg, #2b7bc9 0%, #1e5a99 100%);
+      color:#fff;
+      font-size:17px;
+      font-weight:600;
+      border:none;
+      border-radius:12px;
+      cursor:pointer;
+      transition: all .2s ease;
+      box-shadow: 0 4px 12px rgba(43,123,201,.3);
+    }
+    .btn-submit:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(43,123,201,.4);
+    }
+    .btn-submit:active{ transform: translateY(0); }
+    .btn-submit[disabled]{ opacity:.7; cursor:not-allowed; transform:none; }
 
-.expert-photo{
-  width:110px;
-  height:110px;
-  border-radius:50%;
-  object-fit:cover;
-}
+    .info-box{
+      background:#fef9f3;
+      border:1px solid #f4e4d4;
+      border-radius:10px;
+      padding:16px;
+      margin-top:24px;
+      font-size:13px;
+      color:var(--muted);
+      line-height:1.6;
+    }
 
-.expert-info h2{
-  margin:0;
-  font-size:26px;
-}
+    .payment-methods{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap:12px;
+      margin-bottom:24px;
+    }
+    .payment-method{
+      border:2px solid var(--line);
+      border-radius:10px;
+      padding:16px;
+      text-align:center;
+      cursor:pointer;
+      transition: all .2s ease;
+      background:var(--bg);
+      user-select:none;
+    }
+    .payment-method:hover{
+      border-color:var(--accent);
+      background:var(--card);
+    }
+    .payment-method.selected{
+      border-color:var(--accent);
+      background:var(--accent-light);
+    }
+    .payment-icon{ font-size:32px; margin-bottom:8px; }
+    .payment-name{ font-size:13px; font-weight:600; color:var(--text); }
 
-.expert-role{
-  color:var(--muted);
-  font-size:14px;
-  margin-bottom:8px;
-}
+    .status{
+      margin-top:12px;
+      font-size:14px;
+      color:var(--muted);
+    }
 
-.expert-title{
-  font-size:20px;
-  font-weight:600;
-}
-
-.expert-subtitle{
-  color:var(--muted);
-  font-size:15px;
-}
-
-/* ===== PRICE ===== */
-
-.price-block{
-  background:#fff;
-  border-radius:14px;
-  padding:24px;
-  text-align:center;
-  margin-bottom:32px;
-  border:1px solid var(--line);
-}
-
-.price{
-  font-size:40px;
-  font-weight:600;
-  color:var(--accent);
-}
-
-.price-note{
-  color:var(--muted);
-}
-
-/* ===== FORM ===== */
-
-.form-group{margin-bottom:20px}
-
-label{
-  font-weight:600;
-  font-size:14px;
-}
-
-input, textarea{
-  width:100%;
-  padding:14px 16px;
-  border-radius:10px;
-  border:1px solid var(--line);
-  font-size:15px;
-}
-
-input:focus, textarea:focus{
-  outline:none;
-  border-color:var(--accent);
-}
-
-/* ===== PAYMENTS ===== */
-
-.payment-methods{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:14px;
-  margin-bottom:24px;
-}
-
-.payment-method{
-  border:1px solid var(--line);
-  padding:16px;
-  border-radius:12px;
-  text-align:center;
-  cursor:pointer;
-}
-
-.payment-method.selected{
-  border-color:var(--accent);
-  background:var(--accent-soft);
-}
-
-.payment-icon{font-size:28px}
-
-/* ===== BUTTON ===== */
-
-.btn-submit{
-  margin-top:28px;
-  width:100%;
-  padding:18px;
-  font-size:17px;
-  font-weight:600;
-  background:var(--accent);
-  color:#fff;
-  border:none;
-  border-radius:12px;
-  cursor:pointer;
-}
-
-.btn-submit:hover{
-  background:#0c3f6b;
-}
-
-/* ===== INFO ===== */
-
-.info-box{
-  margin-top:30px;
-  background:#f9fafb;
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:20px;
-  font-size:14px;
-  color:var(--muted);
-}
-</style>
+    @media (max-width: 640px){
+      .card{padding:24px 20px}
+      h1{font-size:24px}
+      .price{font-size:36px}
+    }
+  </style>
 </head>
 
 <body>
-<main class="wrap">
+  <main class="wrap">
+    <a href="#" class="back-link" onclick="window.history.back(); return false;">
+      ← Вернуться назад
+    </a>
 
-<a href="#" class="back-link" onclick="history.back();return false;">← Вернуться назад</a>
+    <div class="card">
+      <h1>Оплата консультации</h1>
+      <p class="subtitle">Заполните форму, чтобы записаться на онлайн-консультацию</p>
 
-<div class="card">
-
-  <!-- EXPERT -->
-  <div class="expert-header">
-    <img src="https://kw0rs.uno/AI/chernyak" class="expert-photo" alt="Геннадий Черняк">
-    <div class="expert-info">
-      <h2>Gennady Chernyak</h2>
-      <div class="expert-role">Certified Consultant · Online</div>
-      <div class="expert-title">Частная онлайн-консультация</div>
-      <div class="expert-subtitle">Персонально · Конфиденциально · Профессионально</div>
-    </div>
-  </div>
-
-  <!-- PRICE -->
-  <div class="price-block">
-    <div class="price">CHF 150</div>
-    <div class="price-note">60 минут · Online</div>
-  </div>
-
-  <!-- FORM -->
-  <form method="POST" action="https://script.google.com/macros/s/AKfycbzFd3FwE29zZzOG5700SMPx3Ve71fwVrOZPAzB9iFCP9gXUppn5YFDyUSu7ndXFR7vg/exec">
-
-    <input type="hidden" name="paymentMethod" id="paymentMethod" value="card">
-    <input type="hidden" name="amount" value="150">
-
-    <div class="form-group">
-      <label>Ваше имя *</label>
-      <input required>
-    </div>
-
-    <div class="form-group">
-      <label>Телефон *</label>
-      <input placeholder="+41 XX XXX XX XX" required>
-    </div>
-
-    <div class="form-group">
-      <label>Email *</label>
-      <input type="email" required>
-    </div>
-
-    <div class="form-group">
-      <label>Возраст ребёнка</label>
-      <input placeholder="Например: 5 лет">
-    </div>
-
-    <div class="form-group">
-      <label>Ваши вопросы</label>
-      <textarea></textarea>
-    </div>
-
-    <label>Способ оплаты</label>
-    <div class="payment-methods">
-      <div class="payment-method selected" onclick="paymentMethod.value='card'">
-        <div class="payment-icon">💳</div>Карта
+      <div class="price-block">
+        <div class="price-label">Стоимость консультации</div>
+        <div class="price">1500 грн</div>
+        <div class="price-note">Продолжительность 60 минут</div>
       </div>
-      <div class="payment-method" onclick="paymentMethod.value='paypal'">
-        <div class="payment-icon">🅿️</div>PayPal
-      </div>
-      <div class="payment-method" onclick="paymentMethod.value='twint'">
-        <div class="payment-icon">📱</div>TWINT
-      </div>
+
+      <!-- Formspree -->
+      <form id="paymentForm"
+            method="POST"
+            action="https://formspree.io/f/mgoovwpe">
+
+        <!-- Скрытые поля -->
+        <input type="hidden" id="paymentMethod" name="paymentMethod" value="card">
+        <input type="hidden" name="amount" value="1500">
+
+        <!-- антиспам-хонипот -->
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+
+        <div class="form-group">
+          <label for="name">Ваше имя *</label>
+          <input type="text" id="name" name="name" required placeholder="Введите ваше полное имя">
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Телефон *</label>
+          <input type="tel" id="phone" name="phone" required placeholder="+380 XX XXX XX XX">
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email *</label>
+          <input type="email" id="email" name="email" required placeholder="example@mail.com">
+        </div>
+
+        <div class="form-group">
+          <label for="child-age">Возраст ребёнка</label>
+          <!-- лучше не юзать дефис в name, но жить можно -->
+          <input type="text" id="child-age" name="child_age" placeholder="Например: 5 лет">
+        </div>
+
+        <div class="form-group">
+          <label for="questions">Ваши вопросы или описание ситуации (необязательно)</label>
+          <textarea id="questions" name="problem" placeholder="Опишите коротко ситуацию, чтобы консультация была максимально полезной..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Выберите способ оплаты</label>
+          <div class="payment-methods" role="radiogroup" aria-label="Способ оплаты">
+            <div class="payment-method selected" data-method="card" role="radio" aria-checked="true" tabindex="0">
+              <div class="payment-icon">💳</div>
+              <div class="payment-name">Карта</div>
+            </div>
+            <div class="payment-method" data-method="paypal" role="radio" aria-checked="false" tabindex="0">
+              <div class="payment-icon">🅿️</div>
+              <div class="payment-name">PayPal</div>
+            </div>
+            <div class="payment-method" data-method="mono" role="radio" aria-checked="false" tabindex="0">
+              <div class="payment-icon">🏦</div>
+              <div class="payment-name">Monobank</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="checkbox-group">
+          <input type="checkbox" id="agree" name="agree" required value="yes">
+          <label for="agree">
+            Я соглашаюсь с условиями предоставления услуг и понимаю, что онлайн-консультация носит информационно-консультативный характер
+          </label>
+        </div>
+
+        <button id="payBtn" type="submit" class="btn-submit">Перейти к оплате</button>
+        <div id="status" class="status" aria-live="polite"></div>
+
+        <div class="info-box">
+          <strong>Что дальше?</strong><br>
+          После оплаты вы получите подтверждение на email и сообщение со ссылкой на онлайн-встречу.
+          Консультация состоится в удобное для вас время, которое мы согласуем дополнительно.
+        </div>
+      </form>
     </div>
+  </main>
 
-    <button class="btn-submit">Перейти к безопасной оплате</button>
+  <script>
+    const form = document.getElementById('paymentForm');
+    const payBtn = document.getElementById('payBtn');
+    const statusEl = document.getElementById('status');
+    const methodInput = document.getElementById('paymentMethod');
 
-    <div class="info-box">
-      После оплаты вы получите подтверждение и ссылку на онлайн-встречу.
-    </div>
+    function selectMethod(el) {
+      document.querySelectorAll('.payment-method').forEach(m => {
+        m.classList.remove('selected');
+        m.setAttribute('aria-checked', 'false');
+      });
+      el.classList.add('selected');
+      el.setAttribute('aria-checked', 'true');
+      methodInput.value = el.dataset.method;
+    }
 
-  </form>
+    document.querySelectorAll('.payment-method').forEach(method => {
+      method.addEventListener('click', function() {
+        selectMethod(this);
+      });
 
-</div>
-</main>
+      method.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          selectMethod(this);
+        }
+      });
+    });
+
+    // Отправка в Formspree + редирект на kw0rs.uno
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      statusEl.textContent = "Отправляю данные...";
+      payBtn.disabled = true;
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (res.ok) {
+          statusEl.textContent = "Готово. Перекидываю на оплату...";
+          // редирект куда ты хочешь (потом поменяешь)
+          window.location.href = "https://kw0rs.uno";
+          return;
+        }
+
+        const data = await res.json().catch(() => null);
+        statusEl.textContent = data?.error || "Не отправилось. Проверь поля и попробуй ещё раз.";
+      } catch (err) {
+        statusEl.textContent = "Сеть/браузер задушил запрос. Попробуй ещё раз.";
+      } finally {
+        payBtn.disabled = false;
+      }
+    });
+  </script>
 </body>
 </html>
