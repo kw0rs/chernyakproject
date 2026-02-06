@@ -225,7 +225,7 @@
 
       <div class="price-block">
         <div class="price-label">Стоимость консультации</div>
-        <div class="price">1500 грн</div>
+        <div class="price">60 €</div>
         <div class="price-note">Продолжительность 60 минут</div>
       </div>
 
@@ -235,8 +235,8 @@
             action="https://formspree.io/f/mgoovwpe">
 
         <!-- Скрытые поля -->
-        <input type="hidden" id="paymentMethod" name="paymentMethod" value="card">
-        <input type="hidden" name="amount" value="1500">
+        <input type="hidden" id="paymentMethod" name="paymentMethod" value="paypal">
+        <input type="hidden" name="amount" value="60">
 
         <!-- антиспам-хонипот -->
         <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
@@ -258,7 +258,6 @@
 
         <div class="form-group">
           <label for="child-age">Возраст ребёнка</label>
-          <!-- лучше не юзать дефис в name, но жить можно -->
           <input type="text" id="child-age" name="child_age" placeholder="Например: 5 лет">
         </div>
 
@@ -270,17 +269,13 @@
         <div class="form-group">
           <label>Выберите способ оплаты</label>
           <div class="payment-methods" role="radiogroup" aria-label="Способ оплаты">
-            <div class="payment-method selected" data-method="card" role="radio" aria-checked="true" tabindex="0">
-              <div class="payment-icon">💳</div>
-              <div class="payment-name">Карта</div>
-            </div>
-            <div class="payment-method" data-method="paypal" role="radio" aria-checked="false" tabindex="0">
+            <div class="payment-method selected" data-method="paypal" role="radio" aria-checked="true" tabindex="0">
               <div class="payment-icon">🅿️</div>
               <div class="payment-name">PayPal</div>
             </div>
-            <div class="payment-method" data-method="mono" role="radio" aria-checked="false" tabindex="0">
-              <div class="payment-icon">🏦</div>
-              <div class="payment-name">Monobank</div>
+            <div class="payment-method" data-method="card-ua" role="radio" aria-checked="false" tabindex="0">
+              <div class="payment-icon">💳</div>
+              <div class="payment-name">Карта UA</div>
             </div>
           </div>
         </div>
@@ -333,7 +328,7 @@
       });
     });
 
-    // Отправка в Formspree + редирект на kw0rs.uno
+    // Отправка в Formspree + редирект
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
@@ -348,9 +343,17 @@
         });
 
         if (res.ok) {
-          statusEl.textContent = "Готово. Перекидываю на оплату...";
-          // редирект куда ты хочешь (потом поменяешь)
-          window.location.href = "https://kw0rs.uno";
+          const selectedMethod = methodInput.value;
+          
+          if (selectedMethod === 'paypal') {
+            statusEl.textContent = "Готово. Перекидываю на оплату...";
+            window.location.href = "https://www.paypal.com/ncp/payment/4SD4XDXAA6MY2";
+          } else if (selectedMethod === 'card-ua') {
+            statusEl.textContent = "✅ Спасибо! Ваша заявка принята. Мы свяжемся с вами в ближайшее время для завершения оплаты.";
+            statusEl.style.color = "var(--success)";
+            statusEl.style.fontWeight = "600";
+            form.reset();
+          }
           return;
         }
 
