@@ -220,9 +220,9 @@
       background: linear-gradient(160deg, var(--sky) 0%, var(--soft) 50%, var(--warm) 100%);
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
+      justify-content: center;
       align-items: center;
-      padding: 60px 40px 0;
+      padding: 60px 40px;
       position: relative;
       overflow: hidden;
     }
@@ -250,8 +250,8 @@
 
     .photo-wrap {
       position: relative;
-      width: 320px;
-      max-width: 100%;
+      width: 340px;
+      max-width: 85%;
       opacity: 0;
       animation: fadeUp .9s .5s forwards;
     }
@@ -260,32 +260,33 @@
       width: 100%;
       aspect-ratio: 3/4;
       object-fit: cover;
-      object-position: top;
+      object-position: top center;
       display: block;
-      border-radius: 20px 20px 0 0;
-      box-shadow: 0 -20px 60px rgba(10,22,40,.12);
+      border-radius: 24px;
+      box-shadow: 0 24px 64px rgba(10,22,40,.18);
     }
 
     .photo-card {
       position: absolute;
-      bottom: -20px;
-      left: -30px;
+      bottom: 20px;
+      left: -24px;
       background: var(--white);
       border-radius: 16px;
-      padding: 18px 22px;
+      padding: 16px 20px;
       box-shadow: 0 8px 32px rgba(10,22,40,.14);
       opacity: 0;
       animation: fadeUp .8s .8s forwards;
+      z-index: 2;
     }
     .photo-card .pc-num {
       font-family: var(--ff-display);
-      font-size: 36px;
+      font-size: 32px;
       font-weight: 800;
       color: var(--ink);
       line-height: 1;
     }
     .photo-card .pc-label {
-      font-size: 12px;
+      font-size: 11px;
       color: var(--muted);
       margin-top: 4px;
       font-weight: 500;
@@ -293,13 +294,13 @@
 
     .photo-quote {
       position: absolute;
-      top: 30px;
-      right: -20px;
+      top: 60px;
+      left: calc(100% + 16px);
       background: var(--ink);
       color: var(--white);
       border-radius: 14px;
-      padding: 16px 20px;
-      max-width: 180px;
+      padding: 14px 18px;
+      width: 168px;
       font-size: 12px;
       line-height: 1.6;
       font-style: italic;
@@ -307,11 +308,12 @@
       box-shadow: 0 8px 24px rgba(10,22,40,.2);
       opacity: 0;
       animation: fadeUp .8s .9s forwards;
+      z-index: 2;
     }
     .photo-quote::after {
       content: '';
       position: absolute;
-      left: -8px;
+      right: 100%;
       top: 20px;
       width: 0; height: 0;
       border-right: 8px solid var(--ink);
