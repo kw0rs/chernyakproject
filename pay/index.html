@@ -4,246 +4,517 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Оплата консультации — Геннадий Черняк</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,800;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
   <style>
-    :root{
-      --bg:#f8fafc;
-      --card:#ffffff;
-      --text:#1a2332;
-      --muted:#5a6b7f;
-      --line:#e1e8f0;
-      --shadow: 0 4px 16px rgba(26,35,50,.08);
-      --shadow-hover: 0 8px 24px rgba(26,35,50,.12);
-      --radius: 16px;
-      --max: 680px;
-      --accent: #2b7bc9;
-      --accent-light: #e8f3fc;
+    :root {
+      --ink: #0a1628;
+      --ink-2: #1e3a5f;
+      --sky: #c8e6f5;
+      --sky-deep: #5ba8d4;
+      --sky-bright: #2d8ec4;
+      --cream: #f5f0e8;
+      --warm: #e8dfc8;
+      --gold: #c8a55a;
+      --soft: #e4eff8;
+      --white: #ffffff;
+      --muted: #6b8aaa;
       --success: #16a34a;
       --success-light: #dcfce7;
+
+      --ff-display: 'Fraunces', Georgia, serif;
+      --ff-body: 'DM Sans', system-ui, sans-serif;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      color:var(--text);
-      background: linear-gradient(180deg, #f0f5fa 0%, var(--bg) 100%);
-      background-attachment: fixed;
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--ff-body);
+      background: var(--cream);
+      color: var(--ink);
       min-height: 100vh;
-      font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
-      letter-spacing:.2px;
+      overflow-x: hidden;
     }
-    a{color:inherit;text-decoration:none}
-    .wrap{max-width:var(--max); margin:0 auto; padding:40px 20px 60px}
 
-    .back-link{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      color:var(--muted);
-      font-size:14px;
-      margin-bottom:20px;
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: .5;
+    }
+
+    /* ─── LAYOUT ─────────────────────────────── */
+    .page {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 100vh;
+    }
+
+    /* ─── LEFT PANEL ─────────────────────────── */
+    .left-panel {
+      background: var(--ink);
+      padding: 64px 56px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .left-panel::before {
+      content: '';
+      position: absolute;
+      top: -150px; left: -150px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(93,168,212,.15) 0%, transparent 70%);
+      animation: breathe 8s ease-in-out infinite;
+    }
+    .left-panel::after {
+      content: '';
+      position: absolute;
+      bottom: -100px; right: -100px;
+      width: 350px; height: 350px;
+      background: radial-gradient(circle, rgba(200,165,90,.09) 0%, transparent 70%);
+      animation: breathe 11s ease-in-out infinite reverse;
+    }
+    @keyframes breathe {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.12); }
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,.4);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: .3px;
+      text-decoration: none;
+      margin-bottom: 48px;
       transition: color .2s ease;
+      position: relative;
     }
-    .back-link:hover{ color:var(--accent); }
+    .back-link:hover { color: rgba(255,255,255,.75); }
+    .back-link svg { width: 14px; height: 14px; }
 
-    .card{
-      padding:32px;
-      border-radius: var(--radius);
-      background: var(--card);
-      border: 2px solid var(--line);
-      box-shadow: var(--shadow-hover);
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--sky-deep);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      position: relative;
+      opacity: 0;
+      animation: fadeUp .7s .1s forwards;
+    }
+    .eyebrow::before {
+      content: '';
+      width: 24px; height: 2px;
+      background: var(--sky-deep);
     }
 
-    h1{
-      margin:0 0 8px 0;
-      font-size: 28px;
-      line-height: 1.2;
-      letter-spacing: .2px;
+    .left-title {
+      font-family: var(--ff-display);
+      font-size: clamp(36px, 4vw, 58px);
+      font-weight: 800;
+      line-height: 1.05;
+      color: var(--white);
+      position: relative;
+      opacity: 0;
+      animation: fadeUp .7s .2s forwards;
+    }
+    .left-title em {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--sky);
+    }
+
+    .price-display {
+      margin-top: 40px;
+      padding: 32px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 20px;
+      background: rgba(255,255,255,.04);
+      backdrop-filter: blur(8px);
+      position: relative;
+      opacity: 0;
+      animation: fadeUp .7s .35s forwards;
+    }
+    .price-label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.35);
+      margin-bottom: 12px;
+    }
+    .price-amount {
+      font-family: var(--ff-display);
+      font-size: 64px;
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1;
+    }
+    .price-amount span {
+      font-size: 32px;
+      font-weight: 300;
+      color: var(--sky);
+      margin-right: 6px;
+    }
+    .price-duration {
+      margin-top: 12px;
+      font-size: 14px;
+      color: rgba(255,255,255,.4);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .price-duration::before {
+      content: '';
+      width: 16px; height: 1px;
+      background: rgba(255,255,255,.25);
+    }
+
+    .includes {
+      margin-top: 40px;
+      display: grid;
+      gap: 16px;
+      position: relative;
+      opacity: 0;
+      animation: fadeUp .7s .5s forwards;
+    }
+    .include-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .include-icon {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: rgba(93,168,212,.15);
+      border: 1px solid rgba(93,168,212,.3);
+      display: grid;
+      place-items: center;
+      font-size: 13px;
+      flex-shrink: 0;
+      color: var(--sky);
       font-weight: 700;
-      color: var(--text);
     }
-    .subtitle{
-      color:var(--muted);
-      font-size:15px;
-      margin:0 0 28px 0;
-    }
-
-    .price-block{
-      background:var(--accent-light);
-      border:2px solid var(--accent);
-      border-radius:12px;
-      padding:20px;
-      margin-bottom:28px;
-      text-align:center;
-    }
-    .price-label{
-      font-size:14px;
-      color:var(--muted);
-      margin-bottom:4px;
-    }
-    .price{
-      font-size:42px;
-      font-weight:700;
-      color:var(--accent);
-      line-height:1;
-    }
-    .price-note{
-      font-size:13px;
-      color:var(--muted);
-      margin-top:8px;
+    .include-text {
+      font-size: 14px;
+      color: rgba(255,255,255,.55);
+      line-height: 1.6;
+      padding-top: 3px;
     }
 
-    .form-group{ margin-bottom:20px; }
-
-    label{
-      display:block;
-      font-weight:600;
-      font-size:14px;
-      margin-bottom:8px;
-      color:var(--text);
+    /* ─── RIGHT PANEL ────────────────────────── */
+    .right-panel {
+      background: var(--cream);
+      padding: 64px 56px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
-    input, textarea, select{
-      width:100%;
-      padding:12px 16px;
-      border:2px solid var(--line);
-      border-radius:10px;
-      font-size:15px;
-      font-family:inherit;
+
+    .form-title {
+      font-family: var(--ff-display);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 6px;
+      opacity: 0;
+      animation: fadeUp .7s .15s forwards;
+    }
+    .form-subtitle {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 36px;
+      opacity: 0;
+      animation: fadeUp .7s .25s forwards;
+    }
+
+    /* ─── FORM ───────────────────────────────── */
+    form {
+      opacity: 0;
+      animation: fadeUp .7s .35s forwards;
+    }
+
+    .form-group { margin-bottom: 20px; }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink-2);
+      margin-bottom: 8px;
+      letter-spacing: .2px;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      padding: 13px 16px;
+      border: 2px solid rgba(10,22,40,.12);
+      border-radius: 12px;
+      font-size: 15px;
+      font-family: var(--ff-body);
+      color: var(--ink);
+      background: var(--white);
       transition: all .2s ease;
-      background:var(--bg);
+      outline: none;
+      appearance: none;
     }
-    input:focus, textarea:focus, select:focus{
-      outline:none;
-      border-color:var(--accent);
-      background:var(--card);
+    input:focus, textarea:focus {
+      border-color: var(--sky-bright);
+      box-shadow: 0 0 0 4px rgba(45,142,196,.1);
     }
-    textarea{
-      resize:vertical;
-      min-height:100px;
+    input::placeholder, textarea::placeholder {
+      color: rgba(107,138,170,.6);
     }
-
-    .checkbox-group{
-      display:flex;
-      align-items:flex-start;
-      gap:12px;
-      margin:24px 0;
-    }
-    .checkbox-group input[type="checkbox"]{
-      width:20px;
-      height:20px;
-      margin-top:2px;
-      cursor:pointer;
-      flex-shrink:0;
-    }
-    .checkbox-group label{
-      margin:0;
-      font-weight:400;
-      font-size:13px;
-      cursor:pointer;
+    textarea {
+      resize: vertical;
+      min-height: 96px;
+      line-height: 1.6;
     }
 
-    .btn-submit{
-      width:100%;
-      padding:16px;
-      background: linear-gradient(135deg, #2b7bc9 0%, #1e5a99 100%);
-      color:#fff;
-      font-size:17px;
-      font-weight:600;
-      border:none;
-      border-radius:12px;
-      cursor:pointer;
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    /* ─── PAYMENT METHODS ────────────────────── */
+    .pay-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink-2);
+      margin-bottom: 12px;
+      letter-spacing: .2px;
+    }
+    .payment-methods {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+    .payment-method {
+      border: 2px solid rgba(10,22,40,.1);
+      border-radius: 14px;
+      padding: 16px 20px;
+      cursor: pointer;
       transition: all .2s ease;
-      box-shadow: 0 4px 12px rgba(43,123,201,.3);
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      user-select: none;
     }
-    .btn-submit:hover{
+    .payment-method:hover {
+      border-color: var(--sky-bright);
+    }
+    .payment-method.selected {
+      border-color: var(--sky-bright);
+      background: var(--soft);
+      box-shadow: 0 0 0 3px rgba(45,142,196,.1);
+    }
+    .pay-icon { font-size: 22px; flex-shrink: 0; }
+    .pay-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .pay-hint {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* ─── CHECKBOX ───────────────────────────── */
+    .checkbox-group {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin: 20px 0 28px;
+    }
+    .checkbox-group input[type="checkbox"] {
+      width: 18px; height: 18px;
+      margin-top: 2px;
+      accent-color: var(--sky-bright);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .checkbox-group label {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--muted);
+      line-height: 1.6;
+      cursor: pointer;
+    }
+
+    /* ─── SUBMIT ─────────────────────────────── */
+    .btn-submit {
+      width: 100%;
+      padding: 17px;
+      background: var(--ink);
+      color: var(--white);
+      font-family: var(--ff-body);
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all .25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      letter-spacing: .2px;
+    }
+    .btn-submit:hover {
+      background: var(--ink-2);
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(43,123,201,.4);
+      box-shadow: 0 12px 32px rgba(10,22,40,.2);
     }
-    .btn-submit:active{ transform: translateY(0); }
-    .btn-submit[disabled]{ opacity:.7; cursor:not-allowed; transform:none; }
+    .btn-submit:active { transform: none; }
+    .btn-submit:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    .btn-arrow {
+      transition: transform .2s ease;
+    }
+    .btn-submit:hover .btn-arrow { transform: translateX(4px); }
 
-    .info-box{
-      background:#fef9f3;
-      border:1px solid #f4e4d4;
-      border-radius:10px;
-      padding:16px;
-      margin-top:24px;
-      font-size:13px;
-      color:var(--muted);
-      line-height:1.6;
+    .status {
+      margin-top: 14px;
+      font-size: 14px;
+      color: var(--muted);
+      text-align: center;
+      min-height: 20px;
     }
+    .status.success {
+      color: var(--success);
+      font-weight: 600;
+    }
+    .status.error { color: #dc2626; }
 
-    .payment-methods{
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap:12px;
-      margin-bottom:24px;
+    .after-note {
+      margin-top: 20px;
+      padding: 16px 20px;
+      background: var(--white);
+      border: 1px solid rgba(10,22,40,.08);
+      border-radius: 12px;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
     }
-    .payment-method{
-      border:2px solid var(--line);
-      border-radius:10px;
-      padding:16px;
-      text-align:center;
-      cursor:pointer;
-      transition: all .2s ease;
-      background:var(--bg);
-      user-select:none;
-    }
-    .payment-method:hover{
-      border-color:var(--accent);
-      background:var(--card);
-    }
-    .payment-method.selected{
-      border-color:var(--accent);
-      background:var(--accent-light);
-    }
-    .payment-icon{ font-size:32px; margin-bottom:8px; }
-    .payment-name{ font-size:13px; font-weight:600; color:var(--text); }
+    .after-note strong { color: var(--ink-2); }
 
-    .status{
-      margin-top:12px;
-      font-size:14px;
-      color:var(--muted);
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    @media (max-width: 640px){
-      .card{padding:24px 20px}
-      h1{font-size:24px}
-      .price{font-size:36px}
+    /* ─── RESPONSIVE ─────────────────────────── */
+    @media (max-width: 900px) {
+      .page { grid-template-columns: 1fr; }
+      .left-panel {
+        padding: 48px 32px 56px;
+        min-height: auto;
+      }
+      .right-panel { padding: 48px 32px 64px; }
+      .price-amount { font-size: 52px; }
+    }
+    @media (max-width: 560px) {
+      .form-row { grid-template-columns: 1fr; }
+      .payment-methods { grid-template-columns: 1fr; }
+      .left-panel { padding: 40px 24px 48px; }
+      .right-panel { padding: 40px 24px 56px; }
     }
   </style>
 </head>
 
 <body>
-  <main class="wrap">
-    <a href="#" class="back-link" onclick="window.history.back(); return false;">
-      ← Вернуться назад
-    </a>
+  <div class="page">
 
-    <div class="card">
-      <h1>Оплата консультации</h1>
-      <p class="subtitle">Заполните форму, чтобы записаться на онлайн-консультацию</p>
+    <!-- ── LEFT: SUMMARY ── -->
+    <div class="left-panel">
+      <a href="javascript:history.back()" class="back-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M5 12l7 7M5 12l7-7"/></svg>
+        Назад
+      </a>
 
-      <div class="price-block">
-        <div class="price-label">Стоимость консультации</div>
-        <div class="price">60 €</div>
-        <div class="price-note">Продолжительность 60 минут</div>
+      <div class="eyebrow">Онлайн-консультация</div>
+
+      <h1 class="left-title">
+        Запись<br>и <em>оплата</em>
+      </h1>
+
+      <div class="price-display">
+        <div class="price-label">Стоимость</div>
+        <div class="price-amount">
+          <span>€</span>60
+        </div>
+        <div class="price-duration">60 минут индивидуально</div>
       </div>
 
-      <!-- Formspree -->
+      <div class="includes">
+        <div class="include-item">
+          <div class="include-icon">✓</div>
+          <div class="include-text">Разбор текущего состояния ребёнка и этапа развития</div>
+        </div>
+        <div class="include-item">
+          <div class="include-icon">✓</div>
+          <div class="include-text">Индивидуальная система упражнений для домашних занятий</div>
+        </div>
+        <div class="include-item">
+          <div class="include-icon">✓</div>
+          <div class="include-text">Ответы на ваши вопросы, разбор страхов и мифов</div>
+        </div>
+        <div class="include-item">
+          <div class="include-icon">✓</div>
+          <div class="include-text">Конкретный план реабилитации с ближайшими целями</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── RIGHT: FORM ── -->
+    <div class="right-panel">
+      <h2 class="form-title">Ваши данные</h2>
+      <p class="form-subtitle">Заполните форму — мы свяжемся с вами для подтверждения времени</p>
+
       <form id="paymentForm"
             method="POST"
             action="https://formspree.io/f/mgoovwpe">
 
-        <!-- Скрытые поля -->
         <input type="hidden" id="paymentMethod" name="paymentMethod" value="paypal">
         <input type="hidden" name="amount" value="60">
-
-        <!-- антиспам-хонипот -->
         <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
 
-        <div class="form-group">
-          <label for="name">Ваше имя *</label>
-          <input type="text" id="name" name="name" required placeholder="Введите ваше полное имя">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Ваше имя *</label>
+            <input type="text" id="name" name="name" required placeholder="Полное имя">
+          </div>
+          <div class="form-group">
+            <label for="child-age">Возраст ребёнка</label>
+            <input type="text" id="child-age" name="child_age" placeholder="Например: 4 года">
+          </div>
         </div>
 
         <div class="form-group">
@@ -257,25 +528,24 @@
         </div>
 
         <div class="form-group">
-          <label for="child-age">Возраст ребёнка</label>
-          <input type="text" id="child-age" name="child_age" placeholder="Например: 5 лет">
+          <label for="questions">Опишите ситуацию (необязательно)</label>
+          <textarea id="questions" name="problem" placeholder="Коротко опишите ситуацию — это поможет сделать консультацию максимально полезной с первых минут..."></textarea>
         </div>
 
-        <div class="form-group">
-          <label for="questions">Ваши вопросы или описание ситуации (необязательно)</label>
-          <textarea id="questions" name="problem" placeholder="Опишите коротко ситуацию, чтобы консультация была максимально полезной..."></textarea>
-        </div>
-
-        <div class="form-group">
-          <label>Выберите способ оплаты</label>
-          <div class="payment-methods" role="radiogroup" aria-label="Способ оплаты">
-            <div class="payment-method selected" data-method="paypal" role="radio" aria-checked="true" tabindex="0">
-              <div class="payment-icon">🅿️</div>
-              <div class="payment-name">PayPal</div>
+        <div class="pay-label">Способ оплаты</div>
+        <div class="payment-methods" role="radiogroup">
+          <div class="payment-method selected" data-method="paypal" role="radio" aria-checked="true" tabindex="0">
+            <div class="pay-icon">🅿️</div>
+            <div>
+              <div class="pay-name">PayPal</div>
+              <div class="pay-hint">Международная оплата</div>
             </div>
-            <div class="payment-method" data-method="card-ua" role="radio" aria-checked="false" tabindex="0">
-              <div class="payment-icon">💳</div>
-              <div class="payment-name">Карта UA</div>
+          </div>
+          <div class="payment-method" data-method="card-ua" role="radio" aria-checked="false" tabindex="0">
+            <div class="pay-icon">💳</div>
+            <div>
+              <div class="pay-name">Карта UA</div>
+              <div class="pay-hint">Украинские карты</div>
             </div>
           </div>
         </div>
@@ -283,21 +553,23 @@
         <div class="checkbox-group">
           <input type="checkbox" id="agree" name="agree" required value="yes">
           <label for="agree">
-            Я соглашаюсь с условиями предоставления услуг и понимаю, что онлайн-консультация носит информационно-консультативный характер
+            Я принимаю условия публичной оферты и понимаю, что онлайн-консультация носит информационно-консультативный характер и не заменяет осмотр врача
           </label>
         </div>
 
-        <button id="payBtn" type="submit" class="btn-submit">Перейти к оплате</button>
+        <button id="payBtn" type="submit" class="btn-submit">
+          Перейти к оплате
+          <svg class="btn-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+
         <div id="status" class="status" aria-live="polite"></div>
 
-        <div class="info-box">
-          <strong>Что дальше?</strong><br>
-          После оплаты вы получите подтверждение на email и сообщение со ссылкой на онлайн-встречу.
-          Консультация состоится в удобное для вас время, которое мы согласуем дополнительно.
+        <div class="after-note">
+          <strong>Что дальше?</strong> После оплаты вы получите подтверждение на email и ссылку на встречу. Время консультации согласуем индивидуально.
         </div>
       </form>
     </div>
-  </main>
+  </div>
 
   <script>
     const form = document.getElementById('paymentForm');
@@ -316,23 +588,16 @@
     }
 
     document.querySelectorAll('.payment-method').forEach(method => {
-      method.addEventListener('click', function() {
-        selectMethod(this);
-      });
-
-      method.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          selectMethod(this);
-        }
+      method.addEventListener('click', () => selectMethod(method));
+      method.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectMethod(method); }
       });
     });
 
-    // Отправка в Formspree + редирект
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-
-      statusEl.textContent = "Отправляю данные...";
+      statusEl.textContent = 'Отправляю данные…';
+      statusEl.className = 'status';
       payBtn.disabled = true;
 
       try {
@@ -343,24 +608,26 @@
         });
 
         if (res.ok) {
-          const selectedMethod = methodInput.value;
-          
-          if (selectedMethod === 'paypal') {
-            statusEl.textContent = "Готово. Перекидываю на оплату...";
-            window.location.href = "https://www.paypal.com/ncp/payment/4SD4XDXAA6MY2";
-          } else if (selectedMethod === 'card-ua') {
-            statusEl.textContent = "✅ Спасибо! Ваша заявка принята. Мы свяжемся с вами в ближайшее время для завершения оплаты.";
-            statusEl.style.color = "var(--success)";
-            statusEl.style.fontWeight = "600";
+          if (methodInput.value === 'paypal') {
+            statusEl.textContent = 'Готово — перенаправляю на оплату…';
+            setTimeout(() => {
+              window.location.href = 'https://www.paypal.com/ncp/payment/4SD4XDXAA6MY2';
+            }, 800);
+          } else {
+            statusEl.textContent = '✓ Заявка принята! Мы свяжемся с вами для завершения оплаты.';
+            statusEl.className = 'status success';
             form.reset();
+            document.querySelector('.payment-method[data-method="paypal"]').classList.add('selected');
           }
           return;
         }
 
         const data = await res.json().catch(() => null);
-        statusEl.textContent = data?.error || "Не отправилось. Проверь поля и попробуй ещё раз.";
-      } catch (err) {
-        statusEl.textContent = "Сеть/браузер задушил запрос. Попробуй ещё раз.";
+        statusEl.textContent = data?.error || 'Ошибка. Проверьте поля и попробуйте снова.';
+        statusEl.className = 'status error';
+      } catch {
+        statusEl.textContent = 'Сетевая ошибка. Попробуйте ещё раз.';
+        statusEl.className = 'status error';
       } finally {
         payBtn.disabled = false;
       }
