@@ -35,6 +35,7 @@
       background: var(--cream);
       color: var(--ink);
       overflow-x: hidden;
+      -webkit-text-size-adjust: 100%;
     }
 
     /* ─── NOISE TEXTURE ─────────────────────── */
@@ -686,27 +687,6 @@
       margin: 0 auto;
     }
 
-    /* ─── RESPONSIVE ────────────────────────── */
-    @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; }
-      .hero-right { display: none; }
-      .hero-left { padding: 60px 32px 80px; min-height: auto; }
-      .stats-bar { grid-template-columns: 1fr; }
-      .stat-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,.1); }
-      .about-grid { grid-template-columns: 1fr; gap: 40px; }
-      .benefits-grid { grid-template-columns: 1fr; }
-      .when-grid { grid-template-columns: 1fr; }
-      .cta-wrap { padding: 56px 32px; margin: 0 20px; }
-      .container { padding: 0 20px; }
-      .section { padding: 64px 0; }
-      .photo-quote { display: none; }
-    }
-
-    @media (max-width: 600px) {
-      .hero-cta { flex-direction: column; }
-      .cta-actions { flex-direction: column; align-items: center; }
-    }
-
     /* ─── SCROLL REVEAL ─────────────────────── */
     .reveal {
       opacity: 0;
@@ -716,6 +696,490 @@
     .reveal.visible {
       opacity: 1;
       transform: none;
+    }
+
+    /* ═══════════════════════════════════════════
+       RESPONSIVE — TABLET (≤ 900px)
+       ═══════════════════════════════════════════ */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .hero-left {
+        padding: 60px 32px 48px;
+        min-height: auto;
+      }
+
+      /* Show hero-right on tablets as a compact strip */
+      .hero-right {
+        padding: 40px 32px;
+      }
+
+      .photo-wrap {
+        width: 260px;
+      }
+
+      .photo-quote { display: none; }
+
+      .photo-card {
+        left: -12px;
+        bottom: 12px;
+        padding: 12px 16px;
+      }
+      .photo-card .pc-num { font-size: 26px; }
+
+      .stats-bar {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .stat-item {
+        padding: 28px 20px;
+      }
+      .stat-n { font-size: 38px; }
+      .stat-l { font-size: 12px; }
+
+      .section { padding: 64px 0; }
+      .container { padding: 0 24px; }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .benefits-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .when-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .cta-wrap {
+        padding: 56px 32px;
+        margin: 0 24px;
+        border-radius: 20px;
+      }
+    }
+
+    /* ═══════════════════════════════════════════
+       RESPONSIVE — MOBILE (≤ 600px)
+       ═══════════════════════════════════════════ */
+    @media (max-width: 600px) {
+      .hero-left {
+        padding: 48px 20px 40px;
+      }
+
+      .hero-left::before {
+        width: 350px;
+        height: 350px;
+        top: -150px;
+        left: -150px;
+      }
+
+      .hero-left::after {
+        width: 250px;
+        height: 250px;
+        bottom: -80px;
+        right: -80px;
+      }
+
+      .eyebrow {
+        font-size: 10px;
+        letter-spacing: 2px;
+        margin-bottom: 20px;
+        gap: 10px;
+      }
+      .eyebrow::before { width: 20px; }
+
+      .hero-title {
+        font-size: clamp(34px, 10vw, 48px);
+      }
+
+      .hero-tagline {
+        font-size: 15px;
+        margin-top: 20px;
+        line-height: 1.65;
+      }
+
+      .hero-badge {
+        margin-top: 28px;
+        padding: 10px 18px;
+        font-size: 13px;
+        gap: 8px;
+      }
+
+      .hero-cta {
+        margin-top: 32px;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .hero-cta .btn {
+        width: 100%;
+        justify-content: center;
+        padding: 15px 24px;
+        font-size: 14px;
+      }
+
+      /* Photo — compact strip below hero text */
+      .hero-right {
+        padding: 32px 20px 40px;
+        align-items: center;
+      }
+
+      .photo-wrap {
+        width: 220px;
+        max-width: 60%;
+      }
+
+      .photo-wrap img {
+        border-radius: 18px;
+        box-shadow: 0 16px 40px rgba(10,22,40,.15);
+      }
+
+      .photo-card {
+        left: -10px;
+        bottom: 10px;
+        padding: 10px 14px;
+        border-radius: 12px;
+      }
+      .photo-card .pc-num { font-size: 22px; }
+      .photo-card .pc-label { font-size: 10px; }
+
+      .hero-right::before {
+        width: 70px; height: 70px;
+        top: 20px; right: 20px;
+      }
+      .hero-right::after {
+        width: 46px; height: 46px;
+        top: 32px; right: 32px;
+      }
+
+      /* Stats: horizontal scroll strip */
+      .stats-bar {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0;
+      }
+      .stat-item {
+        padding: 24px 12px;
+        border-right: 1px solid rgba(255,255,255,.1);
+        border-bottom: none;
+      }
+      .stat-item:last-child { border-right: none; }
+      .stat-n { font-size: 32px; }
+      .stat-l { font-size: 11px; margin-top: 4px; }
+
+      .section { padding: 48px 0; }
+      .container { padding: 0 16px; }
+
+      .section-label {
+        font-size: 10px;
+        letter-spacing: 2px;
+        gap: 8px;
+        margin-bottom: 14px;
+      }
+      .section-label::before { width: 16px; }
+
+      .section-title {
+        font-size: clamp(26px, 7vw, 36px);
+      }
+
+      /* About text */
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        margin-top: 36px;
+      }
+
+      .about-text p {
+        font-size: 15px;
+        line-height: 1.7;
+        margin-bottom: 18px;
+      }
+
+      /* Method list */
+      .method-item {
+        padding: 18px 16px;
+        gap: 14px;
+      }
+      .method-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 17px;
+        border-radius: 8px;
+      }
+      .method-content h4 { font-size: 14px; }
+      .method-content p { font-size: 13px; }
+
+      /* Benefits */
+      .benefits-grid {
+        grid-template-columns: 1fr;
+        margin-top: 36px;
+        border-radius: 16px;
+      }
+
+      .benefit-card {
+        padding: 28px 22px;
+      }
+      .benefit-num {
+        font-size: 12px;
+        margin-bottom: 14px;
+      }
+      .benefit-card h3 {
+        font-size: 19px;
+        margin-bottom: 10px;
+      }
+      .benefit-card p { font-size: 13px; }
+
+      /* When needed */
+      .when-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-top: 36px;
+      }
+      .when-item {
+        padding: 20px 18px;
+        gap: 14px;
+        border-radius: 12px;
+      }
+      .when-check {
+        width: 24px;
+        height: 24px;
+        font-size: 12px;
+      }
+      .when-item p {
+        font-size: 14px;
+        line-height: 1.55;
+      }
+
+      /* CTA section */
+      .cta-wrap {
+        padding: 40px 20px;
+        margin: 0 16px;
+        border-radius: 16px;
+      }
+      .cta-wrap h2 {
+        font-size: clamp(26px, 7vw, 36px);
+        margin-bottom: 14px;
+      }
+      .cta-wrap p {
+        font-size: 15px;
+        margin-bottom: 28px;
+        line-height: 1.6;
+      }
+      .cta-actions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+      .cta-actions .btn {
+        width: 100%;
+        justify-content: center;
+        padding: 16px 24px;
+        font-size: 15px;
+      }
+
+      /* Offer */
+      .offer-section { padding: 48px 0; }
+
+      details { border-radius: 14px; }
+
+      summary {
+        padding: 20px 18px;
+        font-size: 17px;
+        gap: 12px;
+      }
+      .sum-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+      }
+
+      .offer-body {
+        padding: 0 18px 24px;
+        padding-top: 20px;
+        font-size: 13px;
+        line-height: 1.8;
+      }
+
+      /* Footer */
+      footer {
+        padding: 36px 20px;
+      }
+      footer p {
+        font-size: 12px;
+        line-height: 1.7;
+      }
+    }
+
+    /* ═══════════════════════════════════════════
+       RESPONSIVE — SMALL MOBILE (≤ 380px)
+       ═══════════════════════════════════════════ */
+    @media (max-width: 380px) {
+      .hero-left {
+        padding: 40px 16px 36px;
+      }
+
+      .hero-title {
+        font-size: 30px;
+      }
+
+      .hero-tagline {
+        font-size: 14px;
+      }
+
+      .hero-badge {
+        font-size: 12px;
+        padding: 9px 14px;
+      }
+
+      .stat-n { font-size: 26px; }
+      .stat-l { font-size: 10px; }
+      .stat-item { padding: 20px 8px; }
+
+      .container { padding: 0 12px; }
+
+      .section-title {
+        font-size: 24px;
+      }
+
+      .benefit-card h3 { font-size: 17px; }
+
+      .photo-wrap {
+        width: 180px;
+        max-width: 55%;
+      }
+      .photo-card .pc-num { font-size: 20px; }
+
+      .cta-wrap {
+        padding: 32px 16px;
+        margin: 0 12px;
+        border-radius: 14px;
+      }
+
+      .cta-wrap h2 { font-size: 24px; }
+      .cta-wrap p { font-size: 14px; }
+
+      summary {
+        padding: 18px 14px;
+        font-size: 15px;
+      }
+      .offer-body {
+        padding: 0 14px 20px;
+        padding-top: 16px;
+        font-size: 12px;
+      }
+    }
+
+    /* ═══════════════════════════════════════════
+       TOUCH DEVICE IMPROVEMENTS
+       ═══════════════════════════════════════════ */
+    @media (hover: none) {
+      .method-item:hover {
+        border-left-color: transparent;
+        background: var(--white);
+      }
+      .method-item:active {
+        border-left-color: var(--sky-bright);
+        background: var(--soft);
+      }
+
+      .when-item:hover {
+        transform: none;
+        box-shadow: none;
+        border-color: rgba(10,22,40,.07);
+      }
+      .when-item:active {
+        background: var(--soft);
+      }
+
+      .benefit-card:hover {
+        background: rgba(255,255,255,.03);
+      }
+
+      .btn-white:hover {
+        transform: none;
+        box-shadow: none;
+      }
+      .btn-white:active {
+        background: var(--cream);
+      }
+
+      .btn-cta-primary:hover {
+        transform: none;
+        box-shadow: none;
+      }
+      .btn-cta-primary:active {
+        background: var(--cream);
+      }
+    }
+
+    /* ═══════════════════════════════════════════
+       SAFE AREA (iPhone notch / dynamic island)
+       ═══════════════════════════════════════════ */
+    @supports (padding: env(safe-area-inset-top)) {
+      .hero-left {
+        padding-top: calc(48px + env(safe-area-inset-top));
+      }
+      footer {
+        padding-bottom: calc(36px + env(safe-area-inset-bottom));
+      }
+    }
+
+    /* ═══════════════════════════════════════════
+       LANDSCAPE MOBILE
+       ═══════════════════════════════════════════ */
+    @media (max-height: 500px) and (orientation: landscape) {
+      .hero-left {
+        padding: 32px 32px;
+        min-height: auto;
+      }
+      .hero {
+        min-height: auto;
+      }
+      .hero-title {
+        font-size: 32px;
+      }
+      .hero-tagline {
+        font-size: 14px;
+        margin-top: 14px;
+      }
+      .hero-badge {
+        margin-top: 16px;
+      }
+      .hero-cta {
+        margin-top: 20px;
+        flex-direction: row;
+      }
+      .hero-cta .btn {
+        width: auto;
+        padding: 12px 24px;
+        font-size: 13px;
+      }
+      .hero-right {
+        padding: 20px 20px 28px;
+      }
+      .photo-wrap {
+        width: 140px;
+      }
+      .photo-card { display: none; }
+    }
+
+    /* ═══════════════════════════════════════════
+       REDUCED MOTION
+       ═══════════════════════════════════════════ */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
     }
   </style>
 </head>
